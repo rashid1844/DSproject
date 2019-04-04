@@ -58,10 +58,17 @@
         </activity>
 
 
+    <activity android:name=".my_requests">
+        <intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
 
 
 
 
-    </application>
+
+
+</application>
 
 </manifest>

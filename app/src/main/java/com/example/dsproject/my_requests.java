@@ -1,25 +1,20 @@
 package com.example.dsproject;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.khizar1556.mkvideoplayer.MKPlayerActivity;
 
 import org.bytedeco.javacpp.presets.opencv_core;
 import org.json.JSONArray;
@@ -37,44 +32,42 @@ import java.util.ArrayList;
 
 import static android.widget.Toast.makeText;
 
-@SuppressLint("ValidFragment")
-public class replies extends Fragment {
 
 
+public class my_requests extends AppCompatActivity {
 
-    private MainActivity main;
-    private String username, password;
-    private String tag ="replies_tag";
+private ListView my_request_listview;
 
-    private String rep_user[]= new String[30];
-    private String stream_id[]= new String[30];
     private String item_name[]= new String[30];
-    private int request_id[]= new int[30];
+    private String tag ="my_request_tag";
 
 
-
-
-
-    @SuppressLint("ValidFragment")
-    public  replies(MainActivity main1, String user,String pass) {main=main1; username=user; password=pass;}
-
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.replies, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.my_requests);
 
+Intent intent=getIntent();
+        String username=intent.getStringExtra("username");
+        String password=intent.getStringExtra("password");
 
 
         httpGET task = new httpGET();
-        task.execute("https://rashid.systemdev.org/php2/get_reply.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\"}");
+        task.execute("https://rashid.systemdev.org/php2/get_my_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\"}");
 
 
 
 
 
 
-        return view;
+
+
+
+
+
+
     }//oncreate
+
 
 
 
@@ -111,10 +104,8 @@ public class replies extends Fragment {
 
 
 
-
-
     private  String GETRequest(String myurl, String params) throws IOException {
-        ConnectivityManager connMgr = (ConnectivityManager) main.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnected()) {
@@ -129,7 +120,9 @@ public class replies extends Fragment {
                 conn.setDoInput(true);
 
 
-                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+
                 conn.setRequestMethod("POST");
 
                 OutputStreamWriter request = new OutputStreamWriter(
@@ -156,13 +149,7 @@ public class replies extends Fragment {
 
 
             } finally {
-                if (is != null) {
-                    is.close();
-                }
-
-
-
-            }
+                if (is != null) { is.close(); } }
         }
 
         else {
@@ -195,6 +182,8 @@ public class replies extends Fragment {
 
 
 
+
+
     public void jsonpr(String in) throws Exception
     {
         //      JSONObject jsonObject;
@@ -209,51 +198,36 @@ public class replies extends Fragment {
         for (int i=0;i<jsonArray.length();i++){
 
             JSONObject jo= jsonArray.getJSONObject(i);
-            Log.v(tag,jo.getString("rep_user"));
+            Log.v(tag,jo.getString("request_id"));
             Log.v(tag,jo.getString("item_name"));
 
-            rep_user[i]=jo.getString("rep_user");
             item_name[i]=jo.getString("item_name");
-            stream_id[i]=jo.getString("stream_id");
-            request_id[i]=jo.getInt("request_id");
-
 
             list.add(item_name[i]);
 
         }
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(main,android.R.layout.simple_list_item_1,list);
-        ListView listView = (ListView) main.findViewById(R.id.listview_replies);
+        ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list);
+        ListView listView = (ListView) findViewById(R.id.my_request_listview);
         listView.setAdapter(adapter);
 
 
 
-        listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Toast toast = makeText(main.getApplicationContext(), "keep pressing", Toast.LENGTH_SHORT);
-                toast.show();
-
-            }
-        });
-
-
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-
-                String url="https://stream.mux.com/"+stream_id[position]+".m3u8";
-                MKPlayerActivity.configPlayer(main).play(url);
-//todo: add counter to calc cost
-                Log.v(tag, item_name[position]);
-
-                return true;
-            }});
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

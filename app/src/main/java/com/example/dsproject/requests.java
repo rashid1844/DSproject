@@ -192,7 +192,17 @@ public class requests extends Fragment {
                 conn.setDoInput(true);
 
 
-                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                if(myurl.equals("https://api.mux.com/video/v1/live-streams"))
+                {
+    conn.setRequestProperty("Content-Type", "application/json");
+    conn.setRequestProperty("Authorization","Basic "+ "ZmJmY2E3NTItMjY4MC00YWU4LWJkZjMtN2RmMGI1MGQ3OTZjOnFLMnptNjFjRVFDcEs3RlgyL1J0a0szdmliYnNpS3Jpc2I5QjFRMXovdEEzOXVTUFgxZFdScXBnNGQyUzFTZmJPT3NsaVVlK1N0Tg==");
+//ACCESS_TOKEN_ID: ACCESS_TOKEN_SECRET encoded using base64 using base64encode.org
+
+                }
+                else {
+                    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                }
+
                 conn.setRequestMethod("POST");
 
                 OutputStreamWriter request = new OutputStreamWriter(
@@ -324,7 +334,8 @@ public class requests extends Fragment {
 
         httpGET2 task = new httpGET2();
 
-       // task.execute("https://rashid.systemdev.org/php2/post_reply.php",); todo add body
+        task.execute("https://api.mux.com/video/v1/live-streams",
+                "{ \"playback_policy\": [\"public\"], \"new_asset_settings\": { \"playback_policy\": [\"public\"] } }");
 
     }
 
@@ -349,36 +360,29 @@ public class requests extends Fragment {
 
     public void key_parser(String in) throws Exception{
 
-        JSONObject jsonObject;
-        JSONArray jsonArray1,jsonArray2;
-
-        jsonObject =new JSONObject(in);
-
-        jsonArray1=jsonObject.getJSONArray("data");
-
-        jsonArray2=jsonArray1.getJSONArray(0);
+        JSONObject jsonObject,jsonObject1;
+        JSONArray jsonArray;
+        String playback_ids,data;
 
 
-      //  jsonArray =new JSONArray(in);
+        jsonObject= new JSONObject(in);
+        data=jsonObject.getString("data");
+        jsonObject= new JSONObject(data);
 
-        for (int i=0;i<jsonArray1.length();i++){
+        playback_ids=jsonObject.getString("playback_ids");
 
-            JSONObject jo= jsonArray1.getJSONObject(i);
-            Log.v(tag,jo.getString("stream_key"));
+        stream_key=jsonObject.getString("stream_key");
 
-            stream_key=jo.getString("stream_key");
-          //  stream_id=jo.getString("stream_id");
-        }
+        jsonArray=new JSONArray(playback_ids);
 
-        for (int i=0;i<jsonArray2.length();i++){
-
-            JSONObject jo= jsonArray2.getJSONObject(i);
-            Log.v(tag,jo.getString("stream_id"));
-
-            stream_id=jo.getString("stream_id");
-        }
+        jsonObject1=jsonArray.getJSONObject(0);
 
 
+        //stream_id=jsonObject.getString("id"); //live
+        stream_id=jsonObject1.getString("id");//playback
+
+        Log.v(tag,"stream_key: "+stream_key);
+        Log.v(tag,"stream_id: "+stream_id);
 
     }
 
