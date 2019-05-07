@@ -9,6 +9,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true //added to be able to compile
+
     }
     buildTypes {
         release {
@@ -28,9 +30,11 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
 
 
+    implementation 'com.google.android.exoplayer:exoplayer:r1.5.8'
 
 
-//for record intent
+
+//for record intent 1.4.3
     implementation 'com.android.support:multidex:1.0.3'
     implementation group: 'org.bytedeco', name: 'javacv', version: '1.4.3'
     implementation group: 'org.bytedeco.javacpp-presets', name: 'opencv', version: '3.4.3-1.4.3', classifier: 'android-arm'
@@ -38,7 +42,15 @@ dependencies {
     implementation group: 'org.bytedeco.javacpp-presets', name: 'ffmpeg', version: '4.0.2-1.4.3', classifier: 'android-arm'
     implementation group: 'org.bytedeco.javacpp-presets', name: 'ffmpeg', version: '4.0.2-1.4.3', classifier: 'android-x86'
 
-    //for player
+    //for player (not working
     implementation 'com.github.khizar1556.MKVideoPlayer:mkvideoplayer:0.1.5'
+
+
+//video player
+    implementation 'com.github.appunite:video-player-android:master-SNAPSHOT'
+    implementation 'com.github.appunite:video-player-android:1.0.1'
+
+
+
 }
 

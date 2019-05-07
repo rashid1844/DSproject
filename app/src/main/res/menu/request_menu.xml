@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <item android:title="Electronics"
+        android:id="@+id/menu_electronics"
+    />
+
+
+
+    <item android:title="Clothing"
+        android:id="@+id/menu_clothing"
+        />
+
+
+    <item android:title="automotive accessories"
+        android:id="@+id/menu_automotive_accessories"
+        />
+
+    <item android:title="mobiles accessories"
+        android:id="@+id/menu_mobiles_accessories"
+        />
+
+    <item android:title="computers"
+        android:id="@+id/menu_computers"
+        />
+
+
+
+
+</menu>

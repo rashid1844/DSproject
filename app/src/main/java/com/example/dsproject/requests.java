@@ -7,15 +7,21 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -57,11 +63,14 @@ public class requests extends Fragment {
     private int click_position=0;
 
 
-    private String item_name[]= new String[30];
-    private int request_id[]=new int[30];
-    private String user[]= new String[30];
+    private String item_name[]= new String[50];
+    private int request_id[]=new int[50];
+    private String user[]= new String[50];
+    private String description[]= new String[50];
 
+    private SwipeRefreshLayout swipeRefreshLayout;
 
+private   ListView listView ;
 
 
     @SuppressLint("ValidFragment")
@@ -72,18 +81,108 @@ public class requests extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.requests, container, false);
 
+        listView = (ListView) view.findViewById(R.id.listview_request);
 
 
         httpGET task = new httpGET();
         task.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\"}");
 
 
+        swipeRefreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.refreshlayout_request);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
 
 
+                httpGET task = new httpGET();
+                task.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"electronics\"}");
 
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            },2000);
+
+            }
+        });
+
+        setHasOptionsMenu(true);
 
         return view;
     }//oncreate
+
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater=main.getMenuInflater();
+        inflater.inflate(R.menu.request_menu,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
+
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.menu_electronics:
+
+                httpGET task = new httpGET();
+                task.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"electronics\"}");
+                return true;
+
+
+            case R.id.menu_clothing:
+
+                httpGET task2 = new httpGET();
+                task2.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"clothing\"}");
+                return true;
+
+
+            case R.id.menu_automotive_accessories:
+
+                httpGET task3 = new httpGET();
+                task3.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"automotive accessories\"}");
+                return true;
+
+
+
+            case R.id.menu_mobiles_accessories:
+
+                httpGET task4 = new httpGET();
+                task4.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"mobiles accessories\"}");
+                return true;
+
+
+
+            case R.id.menu_computers:
+
+                httpGET task5 = new httpGET();
+                task5.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"computers\"}");
+                return true;
+
+
+
+
+
+
+
+
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
 
 
 
@@ -284,6 +383,7 @@ public class requests extends Fragment {
             request_id[i]=jo.getInt("request_id");
             item_name[i]=jo.getString("item_name");
             user[i]=jo.getString("user");
+            description[i]=jo.getString("description");
 
 
             list.add(item_name[i]);
@@ -291,8 +391,14 @@ public class requests extends Fragment {
         }
 
         ArrayAdapter adapter = new ArrayAdapter<String>(main,android.R.layout.simple_list_item_1,list);
-        ListView listView = (ListView) main.findViewById(R.id.listview_request);
+      //  ListView listView = (ListView) main.findViewById(R.id.listview_request);
         listView.setAdapter(adapter);
+
+
+
+
+
+
 
 
 
@@ -300,7 +406,7 @@ public class requests extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast toast = makeText(main.getApplicationContext(), "keep pressing", Toast.LENGTH_SHORT);
+                Toast toast = makeText(main.getApplicationContext(), description[position], Toast.LENGTH_LONG);
                 toast.show();
 
             }
@@ -347,8 +453,8 @@ public class requests extends Fragment {
 
         httpGET3 task = new httpGET3();
         task.execute("https://rashid.systemdev.org/php2/post_reply.php",
-                "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"item_name\":\""+item_name[click_position]+"\",\"request_id\":\""+request_id[click_position]+"\",\"stream_id\":\""+stream_id+"\"}");
-
+                "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"item_name\":\""+item_name[click_position]+"\",\"request_id\":\""+request_id[click_position]+"\",\"req_user\":\""+user[click_position]+"\",\"stream_id\":\""+stream_id+"\"}");
+Log.v(tag, "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"item_name\":\""+item_name[click_position]+"\",\"request_id\":\""+request_id[click_position]+"\",\"req_user\":\""+user[click_position]+"\",\"stream_id\":\""+stream_id+"\"}");
 
     }
 
@@ -378,7 +484,7 @@ public class requests extends Fragment {
         jsonObject1=jsonArray.getJSONObject(0);
 
 
-        //stream_id=jsonObject.getString("id"); //live
+       // stream_id=jsonObject.getString("id"); //live
         stream_id=jsonObject1.getString("id");//playback
 
         Log.v(tag,"stream_key: "+stream_key);
@@ -400,6 +506,11 @@ public class requests extends Fragment {
 
         startActivity(intent);
     }
+
+
+
+
+
 
 
 

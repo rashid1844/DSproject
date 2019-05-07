@@ -2,13 +2,16 @@ package com.example.dsproject;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.appunite.appunitevideoplayer.PlayerActivity;
 import com.khizar1556.mkvideoplayer.MKPlayerActivity;
 
 import org.bytedeco.javacpp.presets.opencv_core;
@@ -35,6 +39,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static android.graphics.Color.YELLOW;
 import static android.widget.Toast.makeText;
 
 @SuppressLint("ValidFragment")
@@ -52,7 +57,7 @@ public class replies extends Fragment {
     private int request_id[]= new int[30];
 
 
-
+private SwipeRefreshLayout swipeRefreshLayout;
 
 
     @SuppressLint("ValidFragment")
@@ -67,6 +72,30 @@ public class replies extends Fragment {
 
         httpGET task = new httpGET();
         task.execute("https://rashid.systemdev.org/php2/get_reply.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\"}");
+
+
+
+
+        swipeRefreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.refreshlayout_replies);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                httpGET task = new httpGET();
+                task.execute("https://rashid.systemdev.org/php2/get_reply.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\"}");
+
+
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                },2000);
+
+            }
+        });
 
 
 
@@ -232,8 +261,12 @@ public class replies extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast toast = makeText(main.getApplicationContext(), "keep pressing", Toast.LENGTH_SHORT);
-                toast.show();
+         //       Toast toast = makeText(main.getApplicationContext(), "keep pressing", Toast.LENGTH_SHORT);
+         //       toast.show();
+
+                ratingpage(position);
+
+
 
             }
         });
@@ -246,7 +279,19 @@ public class replies extends Fragment {
 
 
                 String url="https://stream.mux.com/"+stream_id[position]+".m3u8";
-                MKPlayerActivity.configPlayer(main).play(url);
+                Log.v(tag,url);
+          //      MKPlayerActivity.configPlayer(main).play(url);
+
+
+          //      Intent intent=PlayerActivity.getVideoPlayerIntent(main,url,item_name[position]);
+
+
+
+                startActivity(PlayerActivity.getVideoPlayerIntent(main, url, item_name[position]));
+
+
+
+
 //todo: add counter to calc cost
                 Log.v(tag, item_name[position]);
 
@@ -254,6 +299,27 @@ public class replies extends Fragment {
             }});
 
     }
+
+
+
+
+
+
+
+    public void ratingpage(int a){
+
+        Intent intent=new Intent(main,rating.class);
+        intent.putExtra("username", username);
+        intent.putExtra("password", password);
+        intent.putExtra("user2", rep_user[a]);
+        intent.putExtra("item_name", item_name[a]);
+
+        startActivity(intent);
+    }
+
+
+
+
 
 
 

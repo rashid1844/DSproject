@@ -63,7 +63,7 @@ import org.bytedeco.javacv.FrameFilter;
 public class record  extends Activity implements View.OnClickListener {
 
 
-    private final static String CLASS_LABEL = "record";
+    private final static String CLASS_LABEL = "record_tag";
     private final static String LOG_TAG = CLASS_LABEL;
 
     /* This isn't a live RTMP endpoint. You should replace this line with your own! */
@@ -130,7 +130,7 @@ public class record  extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+     //   setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.record);
 
         Intent intent = getIntent();

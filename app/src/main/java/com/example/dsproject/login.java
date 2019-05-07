@@ -2,6 +2,7 @@ package com.example.dsproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -21,6 +22,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static android.widget.Toast.makeText;
+
 public class login extends AppCompatActivity {
 
 
@@ -28,21 +31,44 @@ public class login extends AppCompatActivity {
 
     private EditText UserNameText, PasswordText;
 
-    private TextView Signupbtn;
+    private TextView Signupbtn, activation_btn;
+
+    private static String tag ="login_tag";
+
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.login2);
 
-        Loginbtn=(Button)findViewById(R.id.Loginbtn);
+        Loginbtn=(Button)findViewById(R.id.btn_login);
 
-        UserNameText=(EditText)findViewById(R.id.UserNameText);
-        PasswordText=(EditText)findViewById(R.id.PasswordText);
+        UserNameText=(EditText)findViewById(R.id.input_email);
+        PasswordText=(EditText)findViewById(R.id.input_password);
 
-        Signupbtn=(TextView)findViewById(R.id.SignupText);
+        Signupbtn=(TextView)findViewById(R.id.link_signup);
+
+
+        activation_btn=(TextView)findViewById(R.id.login_toactivation_btn);
+
+
+        activation_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activationpage();
+            }
+        });
+
+
+
+        SharedPreferences prefs = getSharedPreferences("MyPrefsFile", MODE_PRIVATE);
+        String restoredText = prefs.getString("text", null);
+        if (restoredText != null) {
+            UserNameText.setText( prefs.getString("name", ""));
+            PasswordText.setText( prefs.getString("pass", ""));
+        }
 
 
 
@@ -53,6 +79,10 @@ public class login extends AppCompatActivity {
                 httpPOST task = new httpPOST();
                 task.execute("https://rashid.systemdev.org/php2/login.php");
 
+                SharedPreferences.Editor editor = getSharedPreferences("MyPrefsFile", MODE_PRIVATE).edit();
+                editor.putString("name", UserNameText.getText().toString());
+                editor.putString("pass", PasswordText.getText().toString());
+                editor.apply();
 
             }});
 
@@ -104,6 +134,12 @@ public void signuppage(){
 }
 
 
+    public void activationpage(){
+
+        Intent intent=new Intent(this,activation.class);
+
+        startActivity(intent);
+    }
 
 
 
@@ -131,8 +167,12 @@ public void signuppage(){
             if (result.equals("202"))
 loginpage();
             else if (result.equals("401"))
-            {                    Toast toast = Toast.makeText(getApplicationContext(), "Worng Username or password", Toast.LENGTH_SHORT);
+            {                    Toast toast = Toast.makeText(getApplicationContext(), "Worng User or password", Toast.LENGTH_SHORT);
                 toast.show();}
+            else if (result.equals("406"))
+            {                    Toast toast = Toast.makeText(getApplicationContext(), "Account not activated", Toast.LENGTH_SHORT);
+                toast.show();}
+
             else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Connection issue", Toast.LENGTH_SHORT);
                 toast.show();
@@ -182,9 +222,10 @@ loginpage();
 
         }
 
-        else
+        else {
+            Log.v(tag, "no internet");
             return "404";
-
+        }
 
     }
 
