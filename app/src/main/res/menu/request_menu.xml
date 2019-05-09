@@ -18,8 +18,8 @@
         android:id="@+id/menu_automotive_accessories"
         />
 
-    <item android:title="mobiles accessories"
-        android:id="@+id/menu_mobiles_accessories"
+    <item android:title="mobiles"
+        android:id="@+id/menu_mobiles"
         />
 
     <item android:title="computers"

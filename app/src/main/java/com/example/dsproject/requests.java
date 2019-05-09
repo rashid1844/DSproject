@@ -154,10 +154,10 @@ private   ListView listView ;
 
 
 
-            case R.id.menu_mobiles_accessories:
+            case R.id.menu_mobiles:
 
                 httpGET task4 = new httpGET();
-                task4.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"mobiles accessories\"}");
+                task4.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"mobiles\"}");
                 return true;
 
 

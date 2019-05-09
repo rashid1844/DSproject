@@ -43,14 +43,16 @@ dependencies {
     implementation group: 'org.bytedeco.javacpp-presets', name: 'ffmpeg', version: '4.0.2-1.4.3', classifier: 'android-x86'
 
     //for player (not working
-    implementation 'com.github.khizar1556.MKVideoPlayer:mkvideoplayer:0.1.5'
+  //  implementation 'com.github.khizar1556.MKVideoPlayer:mkvideoplayer:0.1.5'
 
 
-//video player
+    // snapshot version
     implementation 'com.github.appunite:video-player-android:master-SNAPSHOT'
+
+    // or use specific version
     implementation 'com.github.appunite:video-player-android:1.0.1'
 
-
-
+//new player
+    api 'com.github.tcking:giraffeplayer2:0.1.25-lazyLoad'
 }
 

@@ -165,23 +165,23 @@ Log.v(tag,jsonusr);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnected()) {
+try {
+    URL url = new URL(path);
+    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    connection.setDoOutput(true);
+    connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+    connection.setRequestMethod("POST");
 
-        URL url = new URL(path);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setDoOutput(true);
-        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        connection.setRequestMethod("POST");
-
-        OutputStreamWriter request = new OutputStreamWriter(
-                connection.getOutputStream());
-        request.write(jsonusr);
-        request.flush();
-        request.close();
-        connection.connect();
-        int response = connection.getResponseCode();
-        Log.d(tag, "The POST RESPONSE is: " + response);
-        return  Integer.toString(response);
-    }
+    OutputStreamWriter request = new OutputStreamWriter(
+            connection.getOutputStream());
+    request.write(jsonusr);
+    request.flush();
+    request.close();
+    connection.connect();
+    int response = connection.getResponseCode();
+    Log.d(tag, "The POST RESPONSE is: " + response);
+    return Integer.toString(response);
+}catch (Exception e){return "404";}}
 
     else {
 

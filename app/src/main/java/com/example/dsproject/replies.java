@@ -23,7 +23,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.appunite.appunitevideoplayer.PlayerActivity;
-import com.khizar1556.mkvideoplayer.MKPlayerActivity;
 
 import org.bytedeco.javacpp.presets.opencv_core;
 import org.json.JSONArray;
@@ -38,6 +37,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+
+import tcking.github.com.giraffeplayer2.GiraffePlayer;
+import tcking.github.com.giraffeplayer2.VideoInfo;
 
 import static android.graphics.Color.YELLOW;
 import static android.widget.Toast.makeText;
@@ -279,20 +281,21 @@ private SwipeRefreshLayout swipeRefreshLayout;
 
 
                 String url="https://stream.mux.com/"+stream_id[position]+".m3u8";
+
+         //  String url="https://stream.mux.com/TWVKQMvF9EztyE79ovz9wLQc7zG02xSsv.m3u8";
+
+
                 Log.v(tag,url);
-          //      MKPlayerActivity.configPlayer(main).play(url);
+
+                GiraffePlayer.play(main, new VideoInfo(url));
 
 
-          //      Intent intent=PlayerActivity.getVideoPlayerIntent(main,url,item_name[position]);
+//                Intent intent=PlayerActivity.getVideoPlayerIntent(main,url,item_name[position]);startActivity(intent);
 
-
-
-                startActivity(PlayerActivity.getVideoPlayerIntent(main, url, item_name[position]));
-
+   // startActivity(PlayerActivity.getVideoPlayerIntent(main, url, item_name[position]));
 
 
 
-//todo: add counter to calc cost
                 Log.v(tag, item_name[position]);
 
                 return true;
