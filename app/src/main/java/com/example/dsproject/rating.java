@@ -24,7 +24,8 @@ public class rating extends AppCompatActivity {
 
     private String tag="tag_rating";
 private String username, password, user2;
-private int adj;
+private int time;
+private float star,adj;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ private int adj;
          username=intent.getStringExtra("username");
          password=intent.getStringExtra("password");
          user2=intent.getStringExtra("user2");
-
+time=intent.getIntExtra("time",0);
 
         final RatingBar ratingBar=(RatingBar)findViewById(R.id.rating_bar);
         Button rating_btn=(Button)findViewById(R.id.rating_submit_btn);
@@ -51,7 +52,9 @@ private int adj;
 
                 Log.v(tag,"star rating: "+ratingBar.getNumStars());
 
-                adj=ratingBar.getNumStars();
+                star=ratingBar.getRating();
+
+                adj=star*time/20;
 
 
                 httpPOST task = new httpPOST();
@@ -86,7 +89,7 @@ private int adj;
         protected void onPostExecute(Object result) {
 
             if (result.equals("200"))
-            {Toast toast = Toast.makeText(getApplicationContext(), "Payment done successfully", Toast.LENGTH_SHORT);
+            {Toast toast = Toast.makeText(getApplicationContext(), "Payment done!!! for "+time+" Seconds, and "+star+" star rating", Toast.LENGTH_LONG);
                 toast.show();}
             else if (result.equals("401"))
             {                    Toast toast = Toast.makeText(getApplicationContext(), "Worng User or password", Toast.LENGTH_SHORT);

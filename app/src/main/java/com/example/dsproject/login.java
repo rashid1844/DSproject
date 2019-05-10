@@ -108,13 +108,6 @@ public class login extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
     public void loginpage() {
 
         Intent intent=new Intent(this,MainActivity.class);

@@ -37,6 +37,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import tcking.github.com.giraffeplayer2.GiraffePlayer;
 import tcking.github.com.giraffeplayer2.VideoInfo;
@@ -57,8 +59,12 @@ public class replies extends Fragment {
     private String stream_id[]= new String[30];
     private String item_name[]= new String[30];
     private int request_id[]= new int[30];
+    public static int timee = 0;
 
+    Timer timer = new Timer();
+    TimerTask task = new Helper();
 
+    public int review=-1;
 private SwipeRefreshLayout swipeRefreshLayout;
 
 
@@ -106,6 +112,45 @@ private SwipeRefreshLayout swipeRefreshLayout;
 
         return view;
     }//oncreate
+
+
+
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+
+        if(review != -1) {
+            ratingpage(review);
+        review=-1;
+timer.cancel();
+            Toast toast = Toast.makeText(main.getApplicationContext(), "Time:"+Integer.toString(timee), Toast.LENGTH_SHORT);
+            toast.show();
+        timee=0;
+        }
+
+    }
+
+
+
+
+
+
+    class Helper extends TimerTask
+    {
+
+        public void run()
+        {
+        timee++;
+        }
+    }
+
+
+
 
 
 
@@ -266,8 +311,10 @@ private SwipeRefreshLayout swipeRefreshLayout;
          //       Toast toast = makeText(main.getApplicationContext(), "keep pressing", Toast.LENGTH_SHORT);
          //       toast.show();
 
-                ratingpage(position);
+            //    ratingpage(position);
 
+                Timer timer=new Timer();
+                timer.cancel();
 
 
             }
@@ -284,13 +331,16 @@ private SwipeRefreshLayout swipeRefreshLayout;
 
          //  String url="https://stream.mux.com/TWVKQMvF9EztyE79ovz9wLQc7zG02xSsv.m3u8";
 
+                review=position;
 
                 Log.v(tag,url);
 
                 GiraffePlayer.play(main, new VideoInfo(url));
 
+                timer.schedule(task, 1000, 1000);
 
-//                Intent intent=PlayerActivity.getVideoPlayerIntent(main,url,item_name[position]);startActivity(intent);
+
+                // Intent intent=PlayerActivity.getVideoPlayerIntent(main,url,item_name[position]);startActivity(intent);
 
    // startActivity(PlayerActivity.getVideoPlayerIntent(main, url, item_name[position]));
 
@@ -316,8 +366,11 @@ private SwipeRefreshLayout swipeRefreshLayout;
         intent.putExtra("password", password);
         intent.putExtra("user2", rep_user[a]);
         intent.putExtra("item_name", item_name[a]);
+        intent.putExtra("time", timee);
 
         startActivity(intent);
+
+
     }
 
 
