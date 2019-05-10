@@ -9,7 +9,9 @@
 
 
 ### Description
-An application that allows a shopper to get a live review for a desired product. This extends the capabilities of online shopping and provides a better and more realistic experience 
+An application that allows a shopper to get a live review for a desired product. This extends the capabilities of online shopping and provides a better and more realistic experience. Classification is done based item category, as each user might be an expert in a specific category.
+
+Credit to Dr.Majid Khonji for providing the idea of application, and the support during the project.
 
 
 
@@ -90,6 +92,7 @@ An application that allows a shopper to get a live review for a desired product.
 * It uses TCP protocol, port 1935.
 * API provided by MUX.com
 * provides video and audio from replier to requester only.
+* On client side, it uses m3u8 format videos over HTTPS.
 <img src="https://github.com/rashid1844/DSproject/blob/master/pics/stream.png" alt="drawing" width="700"/>
 
 
