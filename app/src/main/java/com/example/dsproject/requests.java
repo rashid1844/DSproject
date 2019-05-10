@@ -85,7 +85,7 @@ private   ListView listView ;
 
 
         httpGET task = new httpGET();
-        task.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\"}");
+        task.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\"}");
 
 
         swipeRefreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.refreshlayout_request);
@@ -96,7 +96,7 @@ private   ListView listView ;
 
 
                 httpGET task = new httpGET();
-                task.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"electronics\"}");
+                task.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"electronics\"}");
 
 
             new Handler().postDelayed(new Runnable() {
@@ -135,21 +135,21 @@ private   ListView listView ;
             case R.id.menu_electronics:
 
                 httpGET task = new httpGET();
-                task.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"electronics\"}");
+                task.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"electronics\"}");
                 return true;
 
 
             case R.id.menu_clothing:
 
                 httpGET task2 = new httpGET();
-                task2.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"clothing\"}");
+                task2.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"clothing\"}");
                 return true;
 
 
             case R.id.menu_automotive_accessories:
 
                 httpGET task3 = new httpGET();
-                task3.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"automotive accessories\"}");
+                task3.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"automotive accessories\"}");
                 return true;
 
 
@@ -157,7 +157,7 @@ private   ListView listView ;
             case R.id.menu_mobiles:
 
                 httpGET task4 = new httpGET();
-                task4.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"mobiles\"}");
+                task4.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"mobiles\"}");
                 return true;
 
 
@@ -165,7 +165,7 @@ private   ListView listView ;
             case R.id.menu_computers:
 
                 httpGET task5 = new httpGET();
-                task5.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"computers\"}");
+                task5.execute("https://rashid.systemdev.org/php2/get_request.php", "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\",\"category\":\"computers\"}");
                 return true;
 
 
@@ -453,8 +453,8 @@ private   ListView listView ;
 
         httpGET3 task = new httpGET3();
         task.execute("https://rashid.systemdev.org/php2/post_reply.php",
-                "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"item_name\":\""+item_name[click_position]+"\",\"request_id\":\""+request_id[click_position]+"\",\"req_user\":\""+user[click_position]+"\",\"stream_id\":\""+stream_id+"\"}");
-Log.v(tag, "{\"name\":\""+username+"\",\"password\":\""+password +"\",\"item_name\":\""+item_name[click_position]+"\",\"request_id\":\""+request_id[click_position]+"\",\"req_user\":\""+user[click_position]+"\",\"stream_id\":\""+stream_id+"\"}");
+                "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\",\"item_name\":\""+item_name[click_position]+"\",\"request_id\":\""+request_id[click_position]+"\",\"req_user\":\""+user[click_position]+"\",\"stream_id\":\""+stream_id+"\"}");
+Log.v(tag, "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\",\"item_name\":\""+item_name[click_position]+"\",\"request_id\":\""+request_id[click_position]+"\",\"req_user\":\""+user[click_position]+"\",\"stream_id\":\""+stream_id+"\"}");
 
     }
 

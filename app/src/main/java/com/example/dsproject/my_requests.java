@@ -53,7 +53,7 @@ Intent intent=getIntent();
 
 
         httpGET task = new httpGET();
-        task.execute("https://rashid.systemdev.org/php2/get_my_request.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\"}");
+        task.execute("https://rashid.systemdev.org/php2/get_my_request.php", "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\"}");
 
 
 

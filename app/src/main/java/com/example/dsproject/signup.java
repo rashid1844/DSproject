@@ -155,7 +155,7 @@ String output;
 
 
     public String createuser(String path) throws Exception {
-String jsonusr="{\"name\":\""+username.getText().toString()+ "\",\"password\":\""+password1.getText().toString()+ "\"}";
+String jsonusr="{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username.getText().toString()+ "\",\"password\":\""+password1.getText().toString()+ "\"}";
 
 Log.v(tag,jsonusr);
 

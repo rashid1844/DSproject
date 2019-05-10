@@ -81,7 +81,7 @@ public class items extends Fragment {
 
 
         httpGET task = new httpGET();
-        task.execute("https://rashid.systemdev.org/php2/get_item.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\"}");
+        task.execute("https://rashid.systemdev.org/php2/get_item.php", "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\"}");
 
 
 
@@ -94,7 +94,7 @@ public class items extends Fragment {
 
 
                 httpGET task = new httpGET();
-                task.execute("https://rashid.systemdev.org/php2/get_item.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\"}");
+                task.execute("https://rashid.systemdev.org/php2/get_item.php", "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\"}");
 
 
                 new Handler().postDelayed(new Runnable() {

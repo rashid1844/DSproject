@@ -73,7 +73,7 @@ private SwipeRefreshLayout swipeRefreshLayout;
 
 
         httpGET task = new httpGET();
-        task.execute("https://rashid.systemdev.org/php2/get_reply.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\"}");
+        task.execute("https://rashid.systemdev.org/php2/get_reply.php", "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\"}");
 
 
 
@@ -85,7 +85,7 @@ private SwipeRefreshLayout swipeRefreshLayout;
             public void onRefresh() {
 
                 httpGET task = new httpGET();
-                task.execute("https://rashid.systemdev.org/php2/get_reply.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\"}");
+                task.execute("https://rashid.systemdev.org/php2/get_reply.php", "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\"}");
 
 
 

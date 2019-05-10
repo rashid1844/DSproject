@@ -207,7 +207,7 @@ loginpage();
 
                 OutputStreamWriter request = new OutputStreamWriter(
                         conn.getOutputStream());
-                request.write("{\"name\":\""+UserNameText.getText().toString()+"\",\"password\":\""+PasswordText.getText().toString() +"\"}");
+                request.write("{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+UserNameText.getText().toString()+"\",\"password\":\""+PasswordText.getText().toString() +"\"}");
                 request.flush();
                 request.close();
                 Log.d("Lab-2.4", "{\"name\":\""+UserNameText.getText().toString()+"\",\"password\":\""+PasswordText.getText().toString() +"\"}");

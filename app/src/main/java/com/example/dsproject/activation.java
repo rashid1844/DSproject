@@ -123,7 +123,7 @@ public class activation extends AppCompatActivity {
 
                 OutputStreamWriter request = new OutputStreamWriter(
                         conn.getOutputStream());
-                request.write("{\"name\":\""+activation_name.getText().toString()+"\",\"password\":\""+activation_pass.getText().toString() +"\",\"code\":\""+activation_code.getText().toString()+"\"}");
+                request.write("{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+activation_name.getText().toString()+"\",\"password\":\""+activation_pass.getText().toString() +"\",\"code\":\""+activation_code.getText().toString()+"\"}");
                 request.flush();
                 request.close();
                 Log.d(tag, "{\"name\":\""+activation_name.getText().toString()+"\",\"password\":\""+activation_pass.getText().toString() +"\",\"code\":\""+activation_code.getText().toString()+"\"}");

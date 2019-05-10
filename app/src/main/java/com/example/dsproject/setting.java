@@ -78,7 +78,7 @@ public class setting extends Fragment {
 
         balance_view=(TextView)view.findViewById(R.id.balance_view);
         httpGET task = new httpGET();
-        task.execute("https://rashid.systemdev.org/php2/get_balance.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\"}");
+        task.execute("https://rashid.systemdev.org/php2/get_balance.php", "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\"}");
 
 
 
@@ -92,7 +92,7 @@ public class setting extends Fragment {
 
 
                 httpGET task = new httpGET();
-                task.execute("https://rashid.systemdev.org/php2/get_balance.php", "{\"name\":\""+username+"\",\"password\":\""+password +"\"}");
+                task.execute("https://rashid.systemdev.org/php2/get_balance.php", "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password +"\"}");
 
                 new Handler().postDelayed(new Runnable() {
                     @Override

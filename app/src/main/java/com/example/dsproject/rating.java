@@ -131,10 +131,10 @@ private int adj;
 
                 OutputStreamWriter request = new OutputStreamWriter(
                         conn.getOutputStream());
-                request.write("{\"name\":\""+username+"\",\"password\":\""+password+"\",\"adj\":\""+adj+"\",\"user\":\""+user2+"\"}");
+                request.write("{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password+"\",\"adj\":\""+adj+"\",\"user\":\""+user2+"\"}");
                 request.flush();
                 request.close();
-                Log.d(tag, "{\"name\":\""+username+"\",\"password\":\""+password+"\",\"adj\":\""+adj+"\",\"user\":\""+user2+"\"}");
+                Log.d(tag, "{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password+"\",\"adj\":\""+adj+"\",\"user\":\""+user2+"\"}");
 
                 // Starts the query
                 conn.connect();

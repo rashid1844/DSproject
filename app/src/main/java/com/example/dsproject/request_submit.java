@@ -82,7 +82,7 @@ private EditText request_submit_description;
              else {
                  httpGET2 task = new httpGET2();
                  task.execute("https://rashid.systemdev.org/php2/post_request.php",
-"{\"name\":\""+username+"\",\"password\":\""+password+"\",\"item_id\":\""+item_id+"\",\"category\":\""+category+"\",\"description\":\"" + request_submit_description.getText().toString() + "\",\"item_name\":\"" + item_name + "\"}");
+"{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password+"\",\"item_id\":\""+item_id+"\",\"category\":\""+category+"\",\"description\":\"" + request_submit_description.getText().toString() + "\",\"item_name\":\"" + item_name + "\"}");
 
              }            }});
 

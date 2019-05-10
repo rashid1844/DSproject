@@ -63,7 +63,7 @@ public class custom_item extends AppCompatActivity {
              else {
                  httpGET2 task = new httpGET2();
                  task.execute("https://rashid.systemdev.org/php2/post_request.php",
-"{\"name\":\""+username+"\",\"password\":\""+password+"\",\"item_id\":\"-1\",\"category\":\"null\",\"description\":\"" + custom_item_description.getText().toString() + "\",\"item_name\":\"" + custom_item_name.getText().toString() + "\"}");
+"{\"prikey\":\"WUHhBpHAwCYSn%+8=Fsy\",\"name\":\""+username+"\",\"password\":\""+password+"\",\"item_id\":\"-1\",\"category\":\"null\",\"description\":\"" + custom_item_description.getText().toString() + "\",\"item_name\":\"" + custom_item_name.getText().toString() + "\"}");
 
              }            }});
 
