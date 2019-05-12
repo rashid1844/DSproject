@@ -104,3 +104,12 @@ Credit to Dr.Majid Khonji for providing the idea of application, and the support
 <img src="https://github.com/rashid1844/DSproject/blob/master/pics/url.png" alt="drawing" width="200"/>
 
 
+
+### Current limitation:
+* The stream record code has compatibility issues with API 24.
+
+### Future work:
+* Improve the video quality of the stream
+* Add caching to improve speed and reduce bandwidth usage.
+* Improve the GUI, and make it more user freindly.
+
