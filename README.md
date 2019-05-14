@@ -1,4 +1,4 @@
- <img src="https://github.com/rashid1844/DSproject/blob/master/pics/logo.png" alt="drawing" width="300"/>
+ <img src="https://github.com/rashid1844/DSproject/blob/master/pics/logo.png" alt="drawing" width="400"/>
 
 <pre>
 
